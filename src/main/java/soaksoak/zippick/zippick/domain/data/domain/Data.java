@@ -66,7 +66,7 @@ public class Data extends BaseTimeEntity {
             day = requestDto.getEndDay().toString();
             if(requestDto.getEndMonth()<10) month = "0" + month;
             if(requestDto.getEndDay()<10) day = "0" + day;
-            this.ended = LocalDate.parse(requestDto.getEndYear() + "-" + requestDto.getEndMonth() + "-" + requestDto.getEndDay());
+            this.ended = LocalDate.parse(requestDto.getEndYear() + "-" + month + "-" + day);
         }
 
         this.description = requestDto.getDescription();
@@ -75,15 +75,18 @@ public class Data extends BaseTimeEntity {
     public void update (DataUpdateRequestDto requestDto) {
         if(requestDto.getDataName() != null) this.dataName = requestDto.getDataName();
 
+        System.out.println("STARTYEAR " + requestDto.getStartYear());
+        System.out.println("ENDYEAR " + requestDto.getEndYear());
+
         String month;
         String day;
 
         if(requestDto.getStartYear() != null){
-            month = requestDto.getEndMonth().toString();
-            day = requestDto.getEndDay().toString();
-            if(requestDto.getEndMonth()<10) month = "0" + month;
-            if(requestDto.getEndDay()<10) day = "0" + day;
-            this.ended = LocalDate.parse(requestDto.getEndYear() + "-" + requestDto.getEndMonth() + "-" + requestDto.getEndDay());
+            month = requestDto.getStartMonth().toString();
+            day = requestDto.getStartDay().toString();
+            if(requestDto.getStartMonth()<10) month = "0" + month;
+            if(requestDto.getStartDay()<10) day = "0" + day;
+            this.started = LocalDate.parse(requestDto.getStartYear() + "-" + month + "-" + day);
         }
 
         if(requestDto.getEndYear() != null){
@@ -91,7 +94,7 @@ public class Data extends BaseTimeEntity {
             day = requestDto.getEndDay().toString();
             if(requestDto.getEndMonth()<10) month = "0" + month;
             if(requestDto.getEndDay()<10) day = "0" + day;
-            this.ended = LocalDate.parse(requestDto.getEndYear() + "-" + requestDto.getEndMonth() + "-" + requestDto.getEndDay());
+            this.ended = LocalDate.parse(requestDto.getEndYear() + "-" + month + "-" + day);
         }
 
         if(requestDto.getDescription() != null) this.description = requestDto.getDescription();

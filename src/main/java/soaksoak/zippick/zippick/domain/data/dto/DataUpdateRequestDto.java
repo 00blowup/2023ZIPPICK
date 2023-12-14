@@ -16,7 +16,7 @@ public class DataUpdateRequestDto {
     @Nullable
     private Long startDay;
     @Nullable
-    private Long EndYear;
+    private Long endYear;
     @Nullable
     private Long endMonth;
     @Nullable

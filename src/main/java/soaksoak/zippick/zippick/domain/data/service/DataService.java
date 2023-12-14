@@ -246,7 +246,7 @@ public class DataService {
         // Chat GPT에게서 답 받아오기
         String question = desc +
                 " 이러한 활동기록에서 드러난 역량이 무엇인지 다음의 키워드들 중에서 3가지를 골라줘: 리더십, 봉사정신, 창의력, 탐구정신, 협동정신, 기획역량, 디자인역량, 연구역량, 개발역량. " +
-                "답은 키워드/키워드/키워드 형식으로 적어줘.";
+                "키워드/키워드/키워드 형식으로 적어줘.";
         String answer = aiService.getAnswer(question);
 
         // 받아온 답을 ArrayList로 변환

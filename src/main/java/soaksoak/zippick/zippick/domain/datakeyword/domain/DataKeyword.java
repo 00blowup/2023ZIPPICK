@@ -21,7 +21,7 @@ public class DataKeyword extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long aidataId;
+    private Long datakeywordId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "data_id")
