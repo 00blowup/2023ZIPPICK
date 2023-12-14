@@ -7,10 +7,13 @@ import org.springframework.lang.Nullable;
 @Getter
 @NoArgsConstructor
 public class DataUpdateRequestDto {
-
+    @Nullable
     private String dataName;
+    @Nullable
     private Long startYear;
+    @Nullable
     private Long startMonth;
+    @Nullable
     private Long startDay;
     @Nullable
     private Long EndYear;
@@ -18,6 +21,7 @@ public class DataUpdateRequestDto {
     private Long endMonth;
     @Nullable
     private Long endDay;
+    @Nullable
     private String description;
 
 }
