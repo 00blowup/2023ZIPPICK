@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import soaksoak.zippick.zippick.domain.data.dto.DataAddRequestDto;
-import soaksoak.zippick.zippick.domain.data.dto.DataResponseDto;
-import soaksoak.zippick.zippick.domain.data.dto.DataUpdateRequestDto;
-import soaksoak.zippick.zippick.domain.data.dto.KeywordSearchRequestDto;
+import soaksoak.zippick.zippick.domain.data.dto.*;
 import soaksoak.zippick.zippick.domain.data.service.DataService;
 
 import java.util.List;
@@ -53,6 +50,12 @@ public class DataController {
     @GetMapping("/mykeyword")
     public List<DataResponseDto> getDataListByKeyword (@RequestBody KeywordSearchRequestDto requestDto, @RequestHeader("Authorization") String accessToken) {
         return dataService.getDataListByKeyword(requestDto, accessToken);
+    }
+
+    // 기록 요약문을 사용한 챗봇 기능
+    @PostMapping("/chatbot")
+    public ResponseEntity<String> chatbot (@RequestBody ChatbotRequestDto requestDto, @RequestHeader("Authorization") String accessToken) throws ParseException{
+        return ResponseEntity.ok().body(dataService.chatbot(requestDto, accessToken));
     }
 
 

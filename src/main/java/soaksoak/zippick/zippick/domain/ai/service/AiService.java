@@ -26,7 +26,7 @@ public class AiService {
 
     public String getAnswer(String input) throws ParseException {
 
-        System.out.println(input);
+        System.out.println("######### 질문: " + input);
 
         // 헤더 설정
         HttpHeaders headers = new HttpHeaders();

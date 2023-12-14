@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
-import java.time.LocalDateTime;
-
 @Getter
 @NoArgsConstructor
 public class DataAddRequestDto {

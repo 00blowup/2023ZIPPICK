@@ -19,7 +19,7 @@ public class Sum {
     @Column
     private Long sumId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String content;
 
     @OneToOne(fetch = FetchType.LAZY)

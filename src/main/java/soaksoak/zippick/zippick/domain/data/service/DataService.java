@@ -2,14 +2,12 @@ package soaksoak.zippick.zippick.domain.data.service;
 
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import soaksoak.zippick.zippick.domain.ai.service.AiService;
-import soaksoak.zippick.zippick.domain.data.dto.KeywordSearchRequestDto;
+import soaksoak.zippick.zippick.domain.data.dto.*;
 import soaksoak.zippick.zippick.domain.data.repository.DataRepository;
 import soaksoak.zippick.zippick.domain.data.domain.Data;
-import soaksoak.zippick.zippick.domain.data.dto.DataAddRequestDto;
-import soaksoak.zippick.zippick.domain.data.dto.DataResponseDto;
-import soaksoak.zippick.zippick.domain.data.dto.DataUpdateRequestDto;
 import soaksoak.zippick.zippick.domain.datakeyword.domain.DataKeyword;
 import soaksoak.zippick.zippick.domain.datakeyword.repository.DataKeywordRepository;
 import soaksoak.zippick.zippick.domain.keyword.domain.Keyword;
@@ -237,6 +235,27 @@ public class DataService {
 
         // 결과 리턴
         return result;
+    }
+
+    // 챗봇 사용
+    public String chatbot(ChatbotRequestDto requestDto, String accessToken) throws ParseException{
+        // 요청받은 데이터의 요약본을 조회하여 질문 쿼리에 추가
+        StringBuilder sb = new StringBuilder();
+
+        List<DataIdRequestDto> idDtos = requestDto.getDataIds();
+        for(DataIdRequestDto dto : idDtos) {
+            Data foundData = dataRepository.findById(dto.getId())
+                    .orElseThrow(() -> new EntityNotFoundException("해당 기록을 찾을 수 없습니다: " + dto.getId()));
+            Sum foundSum = sumRepository.findByData(foundData)
+                    .orElseThrow(() -> new EntityNotFoundException("해당 기록의 요약문을 찾을 수 없습니다: " + dto.getId()));
+            sb.append(foundSum.getContent() + " ");
+        }
+
+        sb.append("질문자가 위와 같은 활동을 하였음을 참고하여, 다음의 질문에 답해줘: " + requestDto.getQuestion());
+
+        // 생성된 질문 쿼리로 Chat GPT의 답변 받기
+        return aiService.getAnswer(sb.toString());
+
     }
 
     // 키워드 부여 메소드
