@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class AiService {
 
-    @Value("${get.apikey}")
+    @Value("${gpt.apikey}")
     private String apiKey;
     private String modelId = "gpt-3.5-turbo";
     private String url = "https://api.openai.com/v1/chat/completions";
